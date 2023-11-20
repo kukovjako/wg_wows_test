@@ -1,18 +1,20 @@
+import re
 import time
 
 import pygame
 
 from draw_engine.config import SCREEN_WIDTH, SCREEN_HEIGHT
 from draw_engine.engine.base import Primitive
-from draw_engine.engine.constants import COLOR_MAP
+from draw_engine.engine.constants import COLOR_MAP, FIGURES_MAP, \
+    STRING_STRIPPING_PATTERN
 
 
 class Engine2D:
 
     def __init__(self):
         self.run = True
-        self.figure_color = COLOR_MAP[5]  # white
-        self.canvas_color = COLOR_MAP[2]  # blue
+        self.figure_color = COLOR_MAP[4]  # black
+        self.canvas_color = COLOR_MAP[5]  # white
         self.canvas = list()
         self.screen = self._init_screen()
 
@@ -23,16 +25,33 @@ class Engine2D:
         pygame.display.update()
         return screen
 
-    def set_figure_color(self, color: int):
-        self.figure_color = COLOR_MAP[color]
+    def set_figure_color(self, input_color: str):
+        _str = re.sub(STRING_STRIPPING_PATTERN, "", input_color)
+        try:
+            self.figure_color = COLOR_MAP[int(_str[0])]
+        except (KeyError, IndexError):
+            print("No such color. Using Black")
 
-    def add(self, figure):
+    def _add(self, figure):
         if issubclass(figure, Primitive):
             self.canvas.append(figure(color=self.figure_color))
         else:
             raise Exception("Object added to canvas is not a geometric figure")
 
+    def add_figures_to_canvas(self, figures_input: str):
+        _str = re.sub(STRING_STRIPPING_PATTERN, "", figures_input)
+        if _str:
+            for num in _str:
+                try:
+                    self._add(FIGURES_MAP[int(num)])
+                except KeyError:
+                    print("Wrong number entered: No such figure")
+        else:
+            print("No figures were selected, shutting down")
+            self.shutdown()
+
     def clear_canvas(self):
+        print("Clearing canvas")
         self.canvas = list()
         self.screen.fill(self.canvas_color)
         pygame.display.update()

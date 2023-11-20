@@ -5,7 +5,10 @@ import pygame
 
 
 class Rectangle(Primitive):
-    size = RECTANGLE_DEFAULT_SIZE
+
+    def __init__(self, color):
+        super().__init__(color)
+        self.size = RECTANGLE_DEFAULT_SIZE
 
     def draw(self, screen):
         super().draw()

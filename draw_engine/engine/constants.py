@@ -1,3 +1,4 @@
+from draw_engine.engine.primitives import Rectangle, Circle, Triangle
 
 COLOR_MAP = {
     1: (255, 0, 0),
@@ -16,5 +17,10 @@ COLOR_NAMES_MAP = {
     5: "white",
 }
 
+FIGURES_MAP = {
+    1: Rectangle,
+    2: Circle,
+    3: Triangle
+}
 
-
+STRING_STRIPPING_PATTERN = "(\[\d+\]|\n)"
