@@ -5,11 +5,12 @@ import pygame
 
 from draw_engine.config import SCREEN_WIDTH, SCREEN_HEIGHT
 from draw_engine.engine.base import Primitive
-from draw_engine.engine.constants import COLOR_MAP, FIGURES_MAP, \
-    STRING_STRIPPING_PATTERN
+from draw_engine.engine.constants import STRING_STRIPPING_PATTERN, COLOR_MAP
+from draw_engine.engine.primitives import Rectangle, Circle, Triangle
 
 
 class Engine2D:
+    FIGURES_MAP = {1: Rectangle, 2: Circle, 3: Triangle}
 
     def __init__(self):
         self.run = True
@@ -43,7 +44,7 @@ class Engine2D:
         if _str:
             for num in _str:
                 try:
-                    self._add(FIGURES_MAP[int(num)])
+                    self._add(self.FIGURES_MAP[int(num)])
                 except KeyError:
                     print("Wrong number entered: No such figure")
         else:

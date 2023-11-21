@@ -1,14 +1,13 @@
 import pygame
 
 from draw_engine.engine.engine import Engine2D
-from draw_engine.engine.primitives import Rectangle, Circle, Triangle
 
 if __name__ == "__main__":
     running = True
     figures_to_draw = input(
         "To add figures to canvas, enter numbers in one line"
-        "\n1 - Rectangle, "
-        "\n2 - Circle, "
+        "\n1 - Rectangle "
+        "\n2 - Circle "
         "\n3 - Triangle"
         "\n"
     )
