@@ -8,6 +8,7 @@ class Primitive:
     def draw(self, screen=None):
         attrs_to_print = dict()
         for k, v in self.__dict__.items():
+            # for printing color name instead of tuple with numbers
             if k == "color":
                 v = COLOR_NAMES_MAP[self.color]
             attrs_to_print[k] = v

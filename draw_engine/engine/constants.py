@@ -15,4 +15,4 @@ COLOR_NAMES_MAP = {
     (255, 255, 255): "white",
 }
 
-STRING_STRIPPING_PATTERN = "(\[\d+\]|\n)"
+GET_INT_PATTERN = "[^0-9]"

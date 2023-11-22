@@ -5,19 +5,19 @@ import pygame
 
 from draw_engine.config import SCREEN_WIDTH, SCREEN_HEIGHT
 from draw_engine.engine.base import Primitive
-from draw_engine.engine.constants import STRING_STRIPPING_PATTERN, COLOR_MAP
+from draw_engine.engine.constants import COLOR_MAP, GET_INT_PATTERN
 from draw_engine.engine.primitives import Rectangle, Circle, Triangle
 
 
 class Engine2D:
     FIGURES_MAP = {1: Rectangle, 2: Circle, 3: Triangle}
 
-    def __init__(self):
+    def __init__(self, screen=None):
         self.run = True
         self.figure_color = COLOR_MAP[4]  # black
         self.canvas_color = COLOR_MAP[5]  # white
         self.canvas = list()
-        self.screen = self._init_screen()
+        self.screen = screen if screen else self._init_screen()
 
     def _init_screen(self):
         screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -27,7 +27,8 @@ class Engine2D:
         return screen
 
     def set_figure_color(self, input_color: str):
-        _str = re.sub(STRING_STRIPPING_PATTERN, "", input_color)
+        # stripping user input
+        _str = re.sub(GET_INT_PATTERN, "", input_color)
         try:
             self.figure_color = COLOR_MAP[int(_str[0])]
         except (KeyError, IndexError):
@@ -37,10 +38,12 @@ class Engine2D:
         if issubclass(figure, Primitive):
             self.canvas.append(figure(color=self.figure_color))
         else:
+            # just in case
             raise Exception("Object added to canvas is not a geometric figure")
 
     def add_figures_to_canvas(self, figures_input: str):
-        _str = re.sub(STRING_STRIPPING_PATTERN, "", figures_input)
+        # stripping user input
+        _str = re.sub(GET_INT_PATTERN, "", figures_input)
         if _str:
             for num in _str:
                 try:
@@ -49,7 +52,7 @@ class Engine2D:
                     print("Wrong number entered: No such figure")
         else:
             print("No figures were selected, shutting down")
-            self.shutdown()
+            self._shutdown()
 
     def clear_canvas(self):
         print("Clearing canvas")
@@ -58,6 +61,7 @@ class Engine2D:
         pygame.display.update()
 
     def draw(self):
+        # Drawing happens too fast to be user-friendly, so I added sleeps
         for item in self.canvas:
             item.draw(self.screen)
             pygame.display.update()
@@ -65,7 +69,7 @@ class Engine2D:
 
         self.clear_canvas()
         time.sleep(2)
-        self.shutdown()
+        self._shutdown()
 
-    def shutdown(self):
+    def _shutdown(self):
         self.run = False
