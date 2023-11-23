@@ -1,6 +1,6 @@
-from wiki_test.base.config import POPULAR_LANGUAGES_URL
-from wiki_test.base.parser import WikiParser
-from wiki_test.base.table_dataclasses import (
+from base.config import POPULAR_LANGUAGES_URL
+from base.parser import WikiParser
+from base.table_dataclasses import (
     WikiPopularLanguagesTable,
     WikiPopularLanguagesTableRow,
 )

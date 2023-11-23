@@ -3,10 +3,10 @@ import time
 
 import pygame
 
-from draw_engine.config import SCREEN_WIDTH, SCREEN_HEIGHT
-from draw_engine.engine.base import Primitive
-from draw_engine.engine.constants import COLOR_MAP, GET_INT_PATTERN
-from draw_engine.engine.primitives import Rectangle, Circle, Triangle
+from config import SCREEN_WIDTH, SCREEN_HEIGHT
+from engine.base import Primitive
+from engine.constants import COLOR_MAP, GET_INT_PATTERN
+from engine.primitives import Rectangle, Circle, Triangle
 
 
 class Engine2D:
@@ -68,7 +68,7 @@ class Engine2D:
             time.sleep(1)
 
         self.clear_canvas()
-        time.sleep(2)
+        time.sleep(1)
         self._shutdown()
 
     def _shutdown(self):

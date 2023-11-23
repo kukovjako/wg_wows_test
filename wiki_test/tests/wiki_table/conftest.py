@@ -1,5 +1,5 @@
 import pytest
-from wiki_test.base.common import wiki_table_setup
+from base.common import wiki_table_setup
 
 
 @pytest.fixture(scope="session", autouse=True)

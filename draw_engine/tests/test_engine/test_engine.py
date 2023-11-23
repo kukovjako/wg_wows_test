@@ -2,8 +2,8 @@ from unittest.mock import patch, Mock
 
 import pytest
 import pygame
-from draw_engine.engine.constants import COLOR_MAP
-from draw_engine.engine.primitives import Rectangle, Circle, Triangle
+from engine.constants import COLOR_MAP
+from engine.primitives import Rectangle, Circle, Triangle
 
 
 class TestFigures:
@@ -82,3 +82,9 @@ class TestEngine:
         with patch.object(pygame.display, "update", Mock()):
             engine.clear_canvas()
             assert len(engine.canvas) == 0
+
+    def test_shutdown(self, setup, capfd):
+        engine = setup
+        assert engine.run is True
+        engine._shutdown()
+        assert engine.run is False

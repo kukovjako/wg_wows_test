@@ -1,11 +1,11 @@
-from draw_engine.config import (
+from config import (
     RECTANGLE_DEFAULT_SIZE,
     LINE_WIDTH,
     CIRCLE_CENTER,
     CIRCLE_RADIUS,
     TRIANGLE_DEFAULT_SIZE,
 )
-from draw_engine.engine.base import Primitive
+from engine.base import Primitive
 import pygame
 
 

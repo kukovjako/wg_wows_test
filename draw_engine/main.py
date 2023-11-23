@@ -1,9 +1,8 @@
 import pygame
 
-from draw_engine.engine.engine import Engine2D
+from engine.engine import Engine2D
 
 if __name__ == "__main__":
-    running = True
     figures_to_draw = input(
         "To add figures to canvas, enter numbers in one line"
         "\n1 - Rectangle "
@@ -25,7 +24,6 @@ if __name__ == "__main__":
     while engine.run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                engine.run = False
         engine.draw()
     pygame.quit()
-1

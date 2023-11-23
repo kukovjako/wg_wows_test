@@ -1,7 +1,7 @@
 from unittest.mock import Mock
 import pytest
 
-from draw_engine.engine.engine import Engine2D
+from engine.engine import Engine2D
 
 
 @pytest.fixture(scope="function")

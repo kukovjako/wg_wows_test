@@ -4,8 +4,8 @@ from typing import List
 import requests
 from bs4 import BeautifulSoup
 
-from wiki_test.base.config import POPULAR_WEBSITES_TABLE_NAME, TABLE_CELLS_STRIPPING_PATTERN
-from wiki_test.base.table_dataclasses import (
+from base.config import POPULAR_WEBSITES_TABLE_NAME, TABLE_CELLS_STRIPPING_PATTERN
+from base.table_dataclasses import (
     WikiPopularLanguagesTableRow,
     WikiPopularLanguagesTable,
 )

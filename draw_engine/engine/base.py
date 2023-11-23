@@ -1,4 +1,4 @@
-from draw_engine.engine.constants import COLOR_NAMES_MAP
+from engine.constants import COLOR_NAMES_MAP
 
 
 class Primitive:

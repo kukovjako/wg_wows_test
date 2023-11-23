@@ -2,7 +2,7 @@ import re
 from dataclasses import dataclass
 from typing import List
 
-from wiki_test.base.config import GET_INT_PATTERN
+from base.config import GET_INT_PATTERN
 
 
 @dataclass
