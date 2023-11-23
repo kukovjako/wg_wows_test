@@ -29,4 +29,7 @@ to run tests:
 ```
 
 ## 3rd assignment:
-not done
+```
+> python algorythm/main.py
+```
+Assignment is not completely done. Map generation is working but pathfinding logic is not finished.  
