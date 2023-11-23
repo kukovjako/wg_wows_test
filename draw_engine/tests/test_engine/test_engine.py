@@ -7,25 +7,27 @@ from engine.primitives import Rectangle, Circle, Triangle
 
 
 class TestFigures:
-
-    @pytest.mark.parametrize('figure_obj, obj_to_patch, expected_response', [
-        (
+    @pytest.mark.parametrize(
+        "figure_obj, obj_to_patch, expected_response",
+        [
+            (
                 Rectangle,
                 "rect",
-                "Drawing Rectangle: with {'color': 'red', 'size': (200, 100, 150, 150)}\n"
-        ),
-        (
+                "Drawing Rectangle: with {'color': 'red', 'size': (200, 100, 150, 150)}\n",
+            ),
+            (
                 Circle,
                 "circle",
-                "Drawing Circle: with {'color': 'red', 'center': (300, 200), 'radius': 75}\n"
-        ),
-        (
+                "Drawing Circle: with {'color': 'red', 'center': (300, 200), 'radius': 75}\n",
+            ),
+            (
                 Triangle,
                 "polygon",
                 "Drawing Triangle: with "
-                "{'color': 'red', 'size': ((200, 100), (250, 150), (150, 200))}\n"
-        ),
-    ])
+                "{'color': 'red', 'size': ((200, 100), (250, 150), (150, 200))}\n",
+            ),
+        ],
+    )
     def test_figure_draw(self, figure_obj, obj_to_patch, expected_response, capfd):
         with patch.object(pygame.draw, obj_to_patch, Mock()):
             figure = figure_obj(color=COLOR_MAP[1])  # Red
@@ -35,7 +37,6 @@ class TestFigures:
 
 
 class TestEngine:
-
     def test_add_figures_to_canvas(self, setup):
         engine = setup
         engine.add_figures_to_canvas("123")

@@ -24,7 +24,3 @@ def divider_module(request):
 @pytest.fixture(scope="function", autouse=True)
 def newline_function(request):
     print("\n")
-
-
-
-

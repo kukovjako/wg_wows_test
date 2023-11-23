@@ -3,30 +3,37 @@ from collections import deque
 
 
 class MapGenerator:
-    def __init__(self, columns, rows):
-        self.columns = columns
-        self.rows = rows
+    #  class generates map, but pathfinding logic is not finished.
 
-    def rand_choice(self, range_: int):
+    def __init__(self, columns, rows):
+        self.width = columns
+        self.length = rows
+
+    @staticmethod
+    def rand_choice(range_: int):
         return random.choice(range(0, range_))
 
-    def generate_map(self, width=10, length=10):
+    def generate_map(self):
         land_counter = 0
-        field = [[0 for w in range(width)] for l in range(length)]
-        land_limit = int(((width * length) / 30 * 10))  # 30% of all cells in massive rounded
+        field = [[0 for w in range(self.width)] for l in range(self.length)]
+        # 30% of all cells in massive rounded
+        land_limit = int(((self.width * self.length) / 30 * 10))
         while land_counter <= land_limit:
-            row_num = self.rand_choice(width)
-            cell = self.rand_choice(length)
+            row_num = self.rand_choice(self.width)
+            cell = self.rand_choice(self.length)
             field[row_num][cell] = 1  # setting land
             land_counter += 1
 
         for row in field:
-            print(' '.join(list(map(str, row))))
+            print(" ".join(list(map(str, row))))
         return field
 
     def get_next_nodes(self, x, y, field):
-        check_next_node = lambda x, y: True if 0 <= x < self.columns and 0 <= y < self.rows \
-                                               and not field[y][x] else False
+        check_next_node = (
+            lambda x, y: True
+            if 0 <= x < self.width and 0 <= y < self.length and not field[y][x]
+            else False
+        )
         ways = [-1, 0], [0, -1], [1, 0], [0, 1]
         return [(x + dx, y + dy) for dx, dy in ways if check_next_node(x + dx, y + dy)]
 
@@ -57,7 +64,9 @@ class MapGenerator:
         for y, row in enumerate(field):
             for x, col in enumerate(row):
                 if not col:
-                    graph[(x, y)] = graph.get((x, y), []) + self.get_next_nodes(x, y, field)
+                    graph[(x, y)] = graph.get((x, y), []) + self.get_next_nodes(
+                        x, y, field
+                    )
 
         queue, visited = self.bfs(graph, start, goal)
 
@@ -66,11 +75,9 @@ class MapGenerator:
         while path_segment and path_segment in visited:
             pass
 
+        # not working as is
 
 
 if __name__ == "__main__":
     map_gen = MapGenerator(10, 10)
     map_gen.generate_map()
-
-
-
